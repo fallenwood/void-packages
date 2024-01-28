@@ -1,0 +1,40 @@
+# Template file for 'pwsh'
+pkgname=pwsh
+version=7.4.1
+revision=1
+_release=1
+archs="x86_64 aarch64 armv7l"
+depends="tar"
+short_desc="PowerShell for every system!"
+maintainer="Orphaned <orphan@voidlinux.org>"
+license="MIT"
+homepage="https://github.com/PowerShell/PowerShell"
+repository=nonfree
+nostrip=yes
+skiprdeps=""
+
+case "$XBPS_TARGET_MACHINE" in
+x86_64)
+  case "$XBPS_TARGET_LIBC" in
+  musl)
+    distfile="https://github.com/PowerShell/PowerShell/releases/download/v$version/powershell-$version-linux-musl-x64.tar.gz"
+    checksum="95B6287FE18F114A3833CEE917D89DC3B5D98C7405200AC13CFCCABDF4793522"
+    ;;
+  *)
+    distfile="https://github.com/PowerShell/PowerShell/releases/download/v$version/powershell-$version-linux-x64.tar.gz"
+    checksum="8BEABAC4431B75E9B67C6D9FAFD8B02CC019F21F230EA3D94AEC1348C50529D3"
+    ;;
+  esac
+  ;;
+aarch64)
+  distfile="https://github.com/PowerShell/PowerShell/releases/download/v$version/powershell-$version-linux-arm64.tar.gz"
+  checksum="719C11544A1F6322F2C58F5591FF7ABB7768AEF97EF0A382E3711F89FA2ADE22"
+  ;;
+armv7l)
+  distfile="https://github.com/PowerShell/PowerShell/releases/download/v$version/powershell-$version-linux-arm32.tar.gz"
+  checksum="BA66844392026779145C10A72D9B9096FE9F71F196AECFFCE45678C25D37C007"
+  ;;
+*)
+  broken="No distfilse available for this target"
+  ;;
+esac
